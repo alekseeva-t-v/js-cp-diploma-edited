@@ -41,7 +41,10 @@ QR-код c уникальным кодом бронирования, в кот�
 
 ## **Стек технологий**
 
-<img src="https://img.shields.io/badge/HTML-161130?style=for-the-badge&logo=html5&logoColor=ЦВЕТ ЛОГОТИПА"/><img src="https://img.shields.io/badge/CSS-161130?style=for-the-badge&logo=css3&logoColor=0091d5"/><img src="https://img.shields.io/badge/JavaScript-161130?style=for-the-badge&logo=javascript&logoColor=efd81d"/><img src="https://img.shields.io/badge/GIT-161130?style=for-the-badge&logo=git&logoColor=E84E31"/>
+![HTML](./img/html.svg)
+![CSS](./img/css.svg)
+![JS](./img/js.svg)
+![GIT](./img/git.svg)
 
 ## **Реализация проекта**
 
