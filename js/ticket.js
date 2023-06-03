@@ -22,7 +22,7 @@ const qrcode = QRCreator(stringQR, {
   version: 8,
   mask: 2,
   image: 'png',
-  modsize: 6,
+  modsize: 4,
   margin: 0,
 });
 
