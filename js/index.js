@@ -34,6 +34,7 @@ let infoAboutSelectedMovie = {
   seanceId: '',
   seanceTime: '',
   seanceStart: '',
+  seanceDay: '',
 };
 
 const pageNavDayToday = createElement(
@@ -79,6 +80,36 @@ pageNavDayList.forEach((pageNavDay) => {
     selectedYear = pageNavDay.dataset.year;
     selectedMonth = pageNavDay.dataset.month;
     selectedDay = pageNavDay.dataset.day;
+
+    const movieSeancesTimeButtonArr = document.querySelectorAll(
+      '.movie-seances__time-button'
+    );
+
+    movieSeancesTimeButtonArr.forEach((button) => {
+      const movieSeancesTime = button.querySelector('.movie-seances__time');
+      const seanceTimeArr = movieSeancesTime.textContent.split(':');
+      const seanceTime = new Date(
+        currentYear,
+        currentMonth,
+        currentDay,
+        seanceTimeArr[0],
+        seanceTimeArr[1]
+      );
+
+      button.disabled =
+        currentDate.getTime() > seanceTime.getTime() &&
+        Number(selectedDay) === currentDay
+          ? true
+          : false;
+      // if (Number(selectedDay) !== currentDay) {
+      //   button.disabled = false;
+      // } else if (
+      //   currentDate.getTime() > seanceTime.getTime() &&
+      //   selectedDay == currentDay
+      // ) {
+      //   button.disabled = true;
+      // }
+    });
   });
 });
 
@@ -145,12 +176,29 @@ sendRequest('POST', requestURL, params)
             );
 
             seancesFilmInHallArr.forEach((seance) => {
+              const seanceTimeArr = seance.seance_time.split(':');
+              const seanceTime = new Date(
+                currentYear,
+                currentMonth,
+                currentDay,
+                seanceTimeArr[0],
+                seanceTimeArr[1]
+              );
               const movieSeancesTimeBlock = createElement(
                 'li',
                 'movie-seances__time-block',
                 movieSeancesList
               );
-              movieSeancesTimeBlock.innerHTML = `<a class="movie-seances__time" href="hall.html" data-seance-start=${seance.seance_start} data-seance-id=${seance.seance_id}>${seance.seance_time}</a>`;
+
+              const movieSeancesTimeButton = createElement(
+                'button',
+                'movie-seances__time-button',
+                movieSeancesTimeBlock
+              );
+
+              movieSeancesTimeButton.disabled =
+                currentDate.getTime() > seanceTime.getTime() ? true : false;
+              movieSeancesTimeButton.innerHTML = `<a class="movie-seances__time" href="hall.html" data-seance-start=${seance.seance_start} data-seance-id=${seance.seance_id} disabled>${seance.seance_time}</a>`;
             });
           }
         }
@@ -204,6 +252,9 @@ sendRequest('POST', requestURL, params)
         infoAboutSelectedMovie.seanceStart = String(
           seanceStartDate.getTime() / 1000
         );
+        infoAboutSelectedMovie.seanceDay = seanceStartDate.toLocaleString('ru-Ru', {
+          dateStyle: 'short',
+        })
 
         localStorage.setItem(
           'selectedMovie',

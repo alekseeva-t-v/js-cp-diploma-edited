@@ -14,12 +14,12 @@ const ticketStart = document.querySelector('.ticket__start');
 ticketStart.textContent = selectedMovie.seanceTime;
 
 const ticketInfoQr = document.querySelector('.ticket__info-qr');
-const stringQR = `Места: ${selectChairs.chairs} Сеанс: ${selectedMovie.seanceId}`;
+const stringQR = `Фильм: ${selectedMovie.movieName} Зал: ${selectedMovie.hallName} Места: ${selectChairs.chairs} Сеанс: ${selectedMovie.seanceId} Дата: ${selectedMovie.seanceDay}`;
 
 const qrcode = QRCreator(stringQR, {
   mode: 4,
   eccl: 0,
-  version: 3,
+  version: 8,
   mask: 2,
   image: 'png',
   modsize: 6,
